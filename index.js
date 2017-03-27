@@ -19,19 +19,15 @@ FailureReporter.prototype = {
     },
     display: function(prefix, result) {
         if (result.passed) {
+			this.out.write('.');
             return;
         }
-        this.out.write(colors.red.bold(result.name.trim())+': ');
-        // result.error.message is the whole stack trace
-        var lines = result.error.message.split('\n');
-        var last = lines[lines.length-1].split(': ');
-        // at http://localhost:7357/assets/test-support.js:5463: No model was found for 'user'
-        // line number and file aren't useful because it's the concatenated file
-        if (last.length > 1) {
-            this.out.write(last[1]+'\n');
-        } else {
-            this.out.write(lines[lines.length-1]+'\n');
-        }
+		this.out.write(colors.red('Failed: ' + result.name + '\n'));
+		this.out.write('Actual: ' + result.error.actual + '\n');
+		this.out.write('Expected: ' +  result.error.expected + '\n');
+		this.out.write('Message: ' + result.error.message + '\n');
+		this.out.write('Stack:' + '\n');
+		this.out.write(result.error.stack + '\n\n');
     },
     finish: function() {
         var summary = '\n'+this.fail+'/'+this.total+' failed\n';
