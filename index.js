@@ -7,8 +7,8 @@ function FailureReporter(out) {
     this.pass = 0;  // used by ci/index.js getExitCode
 }
 
-let errorTitle = chalk.white.bgRed.bold;
-let error = chalk.red;
+var errorTitle = chalk.white.bgRed.bold;
+var error = chalk.red;
 
 FailureReporter.prototype = {
     report: function(prefix, data) {
