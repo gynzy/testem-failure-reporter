@@ -24,19 +24,19 @@ FailureReporter.prototype = {
         if (result.passed) {
             return;
         }
-		this.out.write(errorTitle('Failed: ' + result.name + '\n'));
-		this.out.write(error('Actual: ' + result.error.actual + '\n'));
-		this.out.write(error('Expected: ' +  result.error.expected + '\n'));
-		this.out.write(error('Message: ' + result.error.message + '\n'));
-		this.out.write(error('Stack:' + '\n'));
-		this.out.write(error(result.error.stack) + '\n\n');
+		console.error(errorTitle('Failed: ' + result.name + '\n'));
+		console.error(error('Actual: ' + result.error.actual + '\n'));
+		console.error(error('Expected: ' +  result.error.expected + '\n'));
+		console.error(error('Message: ' + result.error.message + '\n'));
+		console.error(error('Stack:' + '\n'));
+		console.error(error(result.error.stack) + '\n\n');
     },
     finish: function() {
         var summary = '\n '+this.fail+'/'+this.total+' failed \n';
         if (this.fail === 0) {
-            this.out.write(chalk.gray.bgGreen.bold(summary));
+            console.log(chalk.gray.bgGreen.bold(summary));
         } else {
-            this.out.write(errorTitle(summary));
+	    console.error(errorTitle(summary));
         }
     }
 };
